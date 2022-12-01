@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  url_shortener:
+    build:
+      context: .
+    restart: always
+    environment:
+      # App
+      PORT: 3000
+      BASE_URL: https://su.sarga.cloud
+    ports:
+      - '5330:3000'
+    network_mode: 'host'
