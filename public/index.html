@@ -11,9 +11,8 @@
         const url = document.getElementById('url')
         const l = document.getElementById('errorMsg')
 
-        if (!url || url.value.length === 0) {
-          l.innerText = 'Enter valid URL'
-        } else {
+        if (!url || url.value.length === 0) l.innerText = 'Enter valid URL'
+        else {
           const options = {
             method: 'POST',
             headers: {
@@ -29,7 +28,7 @@
             .then((data) => {
               if (!data || data.error) l.innerText = data.error
               else
-                l.innerHTML = `New URL: <a href="${data.shortURL}">${data.shortURL}</a>`
+                l.innerHTML = `New URL: <a href="${data.shortURL}" target="_blank">${data.shortURL}</a>`
             })
         }
       }
