@@ -1,0 +1,20 @@
+{
+  "name": "sarga-url-shortener",
+  "version": "1.0.0",
+  "description": "Url shortener by Sarga",
+  "main": "index.js",
+  "author": "Toni Ramiro <sargatxet.cloud>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "DEBUG=true nodemon -e js,html index.js"
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "nanoid": "4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.20"
+  }
+}

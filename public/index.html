@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener by Sarga</title>
+
+    <script>
+      function send() {
+        const url = document.getElementById('url')
+        const l = document.getElementById('errorMsg')
+
+        if (!url || url.value.length === 0) {
+          l.innerText = 'Enter valid URL'
+        } else {
+          const options = {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify({
+              url: url.value
+            })
+          }
+          fetch('/form', options)
+            .then((response) => response.json())
+            .then((data) => {
+              if (!data || data.error) l.innerText = data.error
+              else
+                l.innerHTML = `New URL: <a href="${data.shortURL}">${data.shortURL}</a>`
+            })
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>URL Shortener by Sarga</h1>
+    <form id="frm" onsubmit="event.preventDefault(); send();">
+      <div>
+        <label for="url">URL to shorten:</label>
+        <input id="url" type="url" />
+      </div>
+      <div>
+        <button type="submit">Short it</button>
+        <button type="reset">Clear</button>
+      </div>
+      <div>
+        <label id="errorMsg" style="font-weight: bold; color: red"></label>
+      </div>
+    </form>
+  </body>
+</html>
