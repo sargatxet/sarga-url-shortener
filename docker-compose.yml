@@ -11,4 +11,3 @@ services:
       BASE_URL: https://su.sarga.cloud
     ports:
       - '5330:3000'
-    network_mode: 'host'

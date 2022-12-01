@@ -1,7 +1,7 @@
 FROM alpine:3
 
 RUN apk update && \
-    add --no-cache nodejs npm yarn
+    apk add --no-cache nodejs npm yarn
 
 WORKDIR /app
 COPY package.json ./
