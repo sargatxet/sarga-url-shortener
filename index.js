@@ -1,17 +1,17 @@
 'use strict'
 
-// Environment
-const PORT = process.env.PORT || 3000
-const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
 // Libraries
 import { customAlphabet } from 'nanoid'
 import fs from 'fs'
+
+// Environment
+const PORT = process.env.PORT || 3000
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // Init
 import express from 'express'
@@ -39,7 +39,10 @@ app.post('/form', (req, res, next) => {
   // Get form data
   const { url } = req.body
 
-  if (!url) return res.status(400).json({ error: 'No URL provided' })
+  if (!url) {
+    console.error(new Date(), '[POST]', 'No URL provided')
+    return res.status(400).json({ error: 'No URL provided' })
+  }
 
   // Create dir if does not exists
   const fileDir = path.join(__dirname, 'tmp')
@@ -62,6 +65,8 @@ app.post('/form', (req, res, next) => {
       expirationDate
     })
   )
+
+  console.log(new Date(), '[POST]', `New URL: ${BASE_URL}/${id}`)
   res.status(200).json({ shortURL: `${BASE_URL}/${id}` })
 })
 
@@ -78,6 +83,7 @@ app.get('/:id', (req, res, next) => {
   // Load file
   const urlData = JSON.parse(fs.readFileSync(fileName))
   if (new Date(urlData.expirationDate) < new Date()) {
+    console.error(new Date(), '[GET]', 'URL expired')
     //fs.rmSync(fileName)
     return res.redirect('/expired.html')
   }
@@ -92,6 +98,6 @@ app.get('*', (req, res, next) => {
 
 // Launch
 app.listen(PORT, (error) => {
-  if (!error) console.log(new Date(), `Server running on port ${PORT}`)
-  else console.error(new Date(), 'Cannot start server', error)
+  if (!error) console.log(new Date(), '[RUN]', `Server running on port ${PORT}`)
+  else console.error(new Date(), '[RUN]', 'Cannot start server', error)
 })
