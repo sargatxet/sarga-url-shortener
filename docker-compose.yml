@@ -6,9 +6,10 @@ services:
       context: .
     restart: always
     environment:
-      # App
       PORT: 3000
       BASE_URL: https://goi.is
+    volumes:
+      - ./urls:/app/tmp
     networks:
       - apps
 
