@@ -21,7 +21,7 @@ const app = express()
 const newId = (len) => {
   const nanoid = customAlphabet(
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-    len || 12
+    len || 10
   )
   return nanoid()
 }

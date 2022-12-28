@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URL Shortener by Sarga</title>
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
+      integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"
+      integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
     <script>
       function send() {
         const url = document.getElementById('url')
@@ -23,7 +37,7 @@
               url: url.value
             })
           }
-          fetch('/form', options)
+          fetch('/api', options)
             .then((response) => response.json())
             .then((data) => {
               if (!data || data.error) l.innerText = data.error
@@ -37,16 +51,20 @@
   <body>
     <h1>URL Shortener by Sarga</h1>
     <form id="frm" onsubmit="event.preventDefault(); send();">
-      <div>
-        <label for="url">URL to shorten:</label>
-        <input id="url" type="url" />
+      <div class="mb-3">
+        <label for="url" class="form-label">URL to shorten:</label>
+        <input id="url" type="url" class="form-control" />
       </div>
       <div>
-        <button type="submit">Short it</button>
-        <button type="reset">Clear</button>
+        <button type="submit" class="btn btn-primary">Short it</button>
+        <button type="reset" class="btn btn-error">Clear</button>
       </div>
       <div>
-        <label id="errorMsg" style="font-weight: bold; color: red"></label>
+        <label
+          id="errorMsg"
+          class="form-label"
+          style="font-weight: bold; color: red"
+        ></label>
       </div>
     </form>
   </body>
