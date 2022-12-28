@@ -57,7 +57,7 @@ app.post('/api', (req, res, next) => {
   } while (fs.existsSync(fileName))
 
   const expirationDate = new Date()
-  expirationDate.setDate(expirationDate.getDate() + 30)
+  expirationDate.setDate(expirationDate.getDate() + 7)
   fs.writeFileSync(
     fileName,
     JSON.stringify({
