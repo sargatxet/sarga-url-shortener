@@ -23,7 +23,7 @@
     <script>
       function send() {
         const url = document.getElementById('url')
-        const l = document.getElementById('errorMsg')
+        const l = document.getElementById('newLink')
 
         if (!url || url.value.length === 0) l.innerText = 'Enter valid URL'
         else {
@@ -42,7 +42,7 @@
             .then((data) => {
               if (!data || data.error) l.innerText = data.error
               else
-                l.innerHTML = `New URL: <a href="${data.shortURL}" target="_blank">${data.shortURL}</a>`
+                l.innerHTML = `New URL: <a href="${data.shortURL}" target="_blank" class="link-success">${data.shortURL}</a>`
             })
         }
       }
@@ -50,28 +50,26 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col">
-          <h1>URL Shortener by Sarga</h1>
-          <form id="frm" onsubmit="event.preventDefault(); send();">
+      <form id="frm" onsubmit="event.preventDefault(); send();">
+        <div class="row">
+          <div class="col">
+            <h1>URL Shortener by Sarga</h1>
             <div class="mb-3">
               <label for="url" class="form-label">URL to shorten:</label>
               <input id="url" type="url" class="form-control" />
             </div>
-            <div>
-              <button type="submit" class="btn btn-primary">Short it</button>
-              <button type="reset" class="btn btn-danger">Clear</button>
-            </div>
-            <div>
-              <label
-                id="errorMsg"
-                class="form-label"
-                style="font-weight: bold; color: red"
-              ></label>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
+        <div class="row justify-content-md-center">
+          <div class="col" id="newLink"></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn btn-primary">Short it</button>
+            <button type="reset" class="btn btn-danger">Clear</button>
+          </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>
