@@ -35,7 +35,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 // Endpoints
 
 // New URL
-app.post('/form', (req, res, next) => {
+app.post('/api', (req, res, next) => {
   // Get form data
   const { url } = req.body
 
