@@ -81,11 +81,10 @@ app.get('/:id', (req, res, next) => {
   if (!fs.existsSync(fileName)) return res.redirect('/index.html')
 
   // Load file
-  const urlData = JSON.parse(fs.readFileSync(fileName))
+  let urlData = JSON.parse(fs.readFileSync(fileName))
   if (new Date(urlData.expirationDate) < new Date()) {
-    console.error(new Date(), '[GET]', 'URL expired')
-    //fs.rmSync(fileName)
-    return res.redirect('/expired.html')
+    console.error(new Date(), '[GET]', `URL ${id} expired`)
+    urlData = JSON.parse(fs.readFileSync('./defaultRoute.json'))
   }
 
   res.redirect(urlData.url)
