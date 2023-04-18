@@ -3,6 +3,7 @@
 // Libraries
 import { customAlphabet } from 'nanoid'
 import fs from 'fs'
+import qrCode from 'qrcode'
 
 // Environment
 const PORT = process.env.PORT || 3000
@@ -35,7 +36,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 // Endpoints
 
 // New URL
-app.post('/api', (req, res, next) => {
+app.post('/api', async (req, res, next) => {
   // Get form data
   const { url } = req.body
 
@@ -46,7 +47,10 @@ app.post('/api', (req, res, next) => {
 
   // Create dir if does not exists
   const fileDir = path.join(__dirname, 'tmp')
-  if (!fs.existsSync(fileDir)) fs.mkdirSync(fileDir, { recursive: true })
+  if (!fs.existsSync(fileDir))
+    fs.mkdirSync(path.join(fileDir, 'qr'), { recursive: true })
+  const qrDir = path.join(__dirname, 'public', 'qr')
+  if (!fs.existsSync(qrDir)) fs.mkdirSync(path.join(qrDir), { recursive: true })
 
   // Get new file to save URL
   let fileName = null
@@ -55,6 +59,19 @@ app.post('/api', (req, res, next) => {
     id = newId()
     fileName = path.join(fileDir, `${id}.json`)
   } while (fs.existsSync(fileName))
+  const shortURL = `${BASE_URL}/${id}`
+
+  // Create QR code
+  const fileNameQr = path.join(qrDir, `${id}.png`)
+  await qrCode.toFile(fileNameQr, shortURL, {
+    type: 'png',
+    errorCorrectionLevel: 'H',
+    margin: 1,
+    color: {
+      dark: '#000000',
+      light: '#ffffff'
+    }
+  })
 
   const expirationDate = new Date()
   expirationDate.setDate(expirationDate.getDate() + 7)
@@ -67,7 +84,10 @@ app.post('/api', (req, res, next) => {
   )
 
   console.log(new Date(), '[POST]', `New URL: ${BASE_URL}/${id}`)
-  res.status(200).json({ shortURL: `${BASE_URL}/${id}` })
+  res.status(200).json({
+    shortURL,
+    shortQR: `${BASE_URL}/qr/${id}.png`
+  })
 })
 
 // Existing URL

@@ -42,7 +42,7 @@
             .then((data) => {
               if (!data || data.error) l.innerText = data.error
               else
-                l.innerHTML = `New URL: <a href="${data.shortURL}" target="_blank" class="link-success">${data.shortURL}</a>`
+                l.innerHTML = `<p>New URL: <a href="${data.shortURL}" target="_blank" class="link-success">${data.shortURL}</a></p><p><img src="${data.shortQR}" /></p>`
             })
         }
       }

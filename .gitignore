@@ -1,3 +1,5 @@
 tmp/
+urls/
 node_modules/
 examples/
+public/qr/
