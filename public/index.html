@@ -52,11 +52,20 @@
             })
         }
       }
+
+      function clearResult() {
+        const l = document.getElementById('newLink')
+        l.innerHTML = ''
+      }
     </script>
   </head>
   <body>
     <div class="container">
-      <form id="frm" onsubmit="event.preventDefault(); send();">
+      <form
+        id="frm"
+        onsubmit="event.preventDefault(); send();"
+        onreset="clearResult();"
+      >
         <div class="row">
           <div class="col">
             <h1>URL Shortener by Sarga</h1>
