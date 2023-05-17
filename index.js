@@ -86,7 +86,7 @@ app.post('/api', async (req, res, next) => {
   console.log(new Date(), '[POST]', `New URL: ${BASE_URL}/${id}`)
   res.status(200).json({
     shortURL,
-    shortQR: `${BASE_URL}/qr/${id}.png`
+    qr: `${BASE_URL}/qr/${id}.png`
   })
 })
 
