@@ -63,7 +63,7 @@ app.post('/api', async (req, res, next) => {
 
   // Create QR code
   const fileNameQr = path.join(qrDir, `${id}.png`)
-  await qrCode.toFile(fileNameQr, shortURL, {
+  await qrCode.toFile(fileNameQr, url, {
     type: 'png',
     errorCorrectionLevel: 'H',
     margin: 1,
