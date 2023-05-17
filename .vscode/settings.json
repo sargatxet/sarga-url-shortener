@@ -1,0 +1,16 @@
+{
+  "files.trimTrailingWhitespace": true,
+  "prettier.trailingComma": "none",
+  "prettier.semi": false,
+  "editor.tabSize": 2,
+  "editor.useTabStops": true,
+  "prettier.singleQuote": true,
+  "editor.fontFamily": "'Cascadia Code PL', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.linkedEditing": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "terminal.integrated.defaultProfile.linux": "Terminal de depuración de JavaScript",
+  "terminal.integrated.defaultProfile.windows": "Terminal de depuración de JavaScript",
+  "editor.minimap.enabled": false
+}
